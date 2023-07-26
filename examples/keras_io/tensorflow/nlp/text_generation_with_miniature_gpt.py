@@ -30,10 +30,10 @@ with TensorFlow 2.3 or higher.
 """
 ## Setup
 """
+import keras_core as keras
+from keras_core import layers
+from keras_core.layers import TextVectorization
 import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import layers
-from tensorflow.keras.layers import TextVectorization
 import numpy as np
 import os
 import string
@@ -130,7 +130,7 @@ def create_model():
     x = transformer_block(x)
     outputs = layers.Dense(vocab_size)(x)
     model = keras.Model(inputs=inputs, outputs=[outputs, x])
-    loss_fn = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
+    loss_fn = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
     model.compile(
         "adam",
         loss=[loss_fn, None],
